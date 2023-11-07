@@ -32,4 +32,4 @@ jobs:
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 
     - name: execute py script # run main.py
-      run: python YTS_Movie Webscraper.py
+      run: python "YTS_Movie Webscraper.py"
