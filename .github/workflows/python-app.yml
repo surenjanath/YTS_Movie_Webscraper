@@ -41,7 +41,10 @@ jobs:
       
     - name: Capture Last Run Information
       id: last-run
-      run: echo "::set-output name=last_run::$(date +'%Y-%m-%d %H:%M:%S')"
+      run: |
+        current_time_trinidad_tobago=$(TZ="America/Port_of_Spain" date +"%Y-%m-%d %H:%M:%S")
+        echo "::set-output name=last_run::$current_time_trinidad_tobago"
+
       
     - name: Update README
       run: |
