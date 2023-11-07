@@ -40,7 +40,7 @@ jobs:
       
     - name: Update README
       run: |
-        last_run="${{ steps.last-run.outputs.last_run}"
+        last_run="${{ steps.last-run.outputs.last_run}}"
         sed -i "s/{{last_run_history}}/{{last_run_history}}\n- $last_run/" README.md
       shell: bash
         
