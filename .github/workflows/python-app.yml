@@ -33,7 +33,17 @@ jobs:
 
     - name: execute py script # run main.py
       run: python "YTS_Movie Webscraper.py"
-
+      
+    - name: Capture Last Run Information
+      id: last-run
+      run: echo "::set-output name=last_run::$(date +'%Y-%m-%d %H:%M:%S')"
+      
+    - name: Update README
+      run: |
+        last_run="${{ steps.last-run.outputs.last_run }}"
+        sed -i "s/{{file_content}}/${last_run}/g" README.md
+        shell: bash
+        
     - name: Commit and Push
       run: |
         git config --global user.name ${{ secrets.GitName }}
@@ -50,3 +60,4 @@ jobs:
         git push
     env:
       GH_TOKEN: ${{ secrets.GH_TOKEN }}
+      
