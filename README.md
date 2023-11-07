@@ -16,7 +16,7 @@ This Python script is designed to scrape movie data from the YTS website and sto
 
 2. Install the required Python libraries by running `pip install aiohttp sqlalchemy request`.
 
-3. Run the script by executing `python yts_movie_scraper.py`. Make sure to set up the working directory and database location as needed.
+3. Run the script by executing `python YTS_Movie Webscraper.py`. Make sure to set up the working directory and database location as needed.
 
 4. The script will fetch movie data from the YTS website, process it, and store it in a SQLite database.
 
