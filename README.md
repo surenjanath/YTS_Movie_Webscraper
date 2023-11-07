@@ -5,7 +5,7 @@ This Python script is designed to scrape movie data from the YTS website and sto
 
 # Automated Status Update
 
-DATABASE ACTION LAST RAN : {{file_content}}
+DATABASE ACTION LAST RAN : 2023-11-07 02:49:33
 
 ## Features
 
