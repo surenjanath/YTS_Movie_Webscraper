@@ -151,6 +151,13 @@ class ErrorLog(Base):
 ############################################
 
 def add_movies_to_db(session, movie_data, batch):
+    
+    ### Optional Code
+    if len(movie_data)>=10000:
+        movie_data = movie_data[:10000]
+        ## To Save file from crossing upload limit. Change if Necessary.
+    ### End Optional
+    
     for counter, data in enumerate(movie_data):
         movie_id = data['id']
 
