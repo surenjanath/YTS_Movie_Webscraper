@@ -42,7 +42,7 @@ jobs:
       run: |
         last_run="${{ steps.last-run.outputs.last_run }}"
         sed -i "s/{{file_content}}/${last_run}/g" README.md
-        shell: bash
+      shell: bash
         
     - name: Commit and Push
       run: |
