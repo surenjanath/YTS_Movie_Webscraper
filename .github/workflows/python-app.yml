@@ -63,7 +63,7 @@ jobs:
         git remote set-url origin "https://github.com/$GITHUB_REPOSITORY"
         git config credential.helper "store --file=.git-credentials"
         echo "https://$GH_TOKEN@github.com" > .git-credentials
-    
+        git pull
         # Push changes using the GitHub token
         git push
     env:
