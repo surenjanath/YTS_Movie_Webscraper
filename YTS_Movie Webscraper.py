@@ -150,7 +150,7 @@ class ErrorLog(Base):
 #               FUNCTIONS
 ############################################
 
-def add_movies_to_db(session, movie_data, batch=10000):
+def add_movies_to_db(session, movie_data, batch):
     for counter, data in enumerate(movie_data):
         movie_id = data['id']
 
@@ -215,6 +215,8 @@ def add_movies_to_db(session, movie_data, batch=10000):
                 except :
                     genres = ['None']
 
+                session.add(movie)
+
                 for genre_name in genres:
                     # Check if the genre already exists in the database
                     genre = session.query(Genre).filter_by(name=genre_name).first()
@@ -223,11 +225,11 @@ def add_movies_to_db(session, movie_data, batch=10000):
 
                     movie.genres.append(genre)
 
-                session.add(movie)
 
-                if len(session.new) % batch == 0:
+
+                if (counter + 1) % batch == 0:
                     print('*' * 50)
-                    print(f'[*] Batch Committing : {counter}/{len(data)}')
+                    print(f'[*] Batch Committing : {counter}/{len(movie_data)}')
                     session.commit()
 
             except Exception as e:
@@ -236,7 +238,7 @@ def add_movies_to_db(session, movie_data, batch=10000):
 
     session.commit()
     print('*' * 50)
-    print(f'[*] Batch Completed : {counter}/{len(data)}')
+    print(f'[*] Batch Completed : {counter}/{len(movie_data)}')
 
 def add_to_ErrorLog(session, ERROR):
     ErrorLogging = [ErrorLog(**record) for record in ERROR]
@@ -292,7 +294,7 @@ class WebScraper(object):
 ############################################
 #               MAIN
 ############################################
-# asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
+asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
 try :
     start = perf_counter()
     r = requests.get('https://yts.mx/api/v2/list_movies.json?limit=50&page=1')
@@ -319,15 +321,15 @@ try :
 
             print('[*] Length of Data Gathered : ', len(scraper.ParsedData))
             ExportPath = os.path.join(os.getcwd(),'Results')
-            if os.path.isdir(ExportPath) == False :
-                os.mkdir(ExportPath)
-            EXPORTPATH = os.path.join(ExportPath, f'{datenow}_Data.xlsx')
+            # if os.path.isdir(ExportPath) == False :
+            #     os.mkdir(ExportPath)
+            # EXPORTPATH = os.path.join(ExportPath, f'{datenow}_Data.xlsx')
 
             if len(scraper.ParsedData) > 0:
                 print("*"*50)
                 print("Adding Data to Database")
                 print("*"*50)
-                add_movies_to_db(session, scraper.ParsedData)
+                add_movies_to_db(session = session, movie_data = scraper.ParsedData, batch = 15000)
 
                 print('[*] PROGRAM ENDED')
                 print('*'*50)
