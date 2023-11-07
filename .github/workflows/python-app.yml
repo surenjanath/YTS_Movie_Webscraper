@@ -33,3 +33,20 @@ jobs:
 
     - name: execute py script # run main.py
       run: python "YTS_Movie Webscraper.py"
+
+    - name: Commit and Push
+      run: |
+        git config --global user.name ${{ secrets.GitName }}
+        git config --global user.email ${{ secrets.GitEmail }}
+        git add .  # Add your database file
+        git commit -m "Update database"  # Commit changes
+    
+        # Set up authentication using the GitHub token secret
+        git remote set-url origin "https://github.com/$GITHUB_REPOSITORY"
+        git config credential.helper "store --file=.git-credentials"
+        echo "https://$GH_TOKEN@github.com" > .git-credentials
+    
+        # Push changes using the GitHub token
+        git push
+    env:
+      GH_TOKEN: ${{ secrets.GH_TOKEN }}
