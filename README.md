@@ -2,6 +2,11 @@
 
 This Python script is designed to scrape movie data from the YTS website and store it in a SQLite database. The code leverages various libraries and technologies to achieve this, including asyncio, aiohttp for web scraping, SQLAlchemy for database management, and requests for API requests.
 
+
+# Automated Status Update
+
+DATABASE ACTION LAST RAN : {{file_content}}
+
 ## Features
 
 - **Web Scraping:** The script uses asynchronous web scraping with aiohttp to fetch movie data from the YTS website. It extracts movie details, including title, year, rating, runtime, and more.
@@ -31,3 +36,5 @@ This Python script is designed to scrape movie data from the YTS website and sto
 ## License
 
 This project is open-source and available under the [MIT License](LICENSE).
+
+
