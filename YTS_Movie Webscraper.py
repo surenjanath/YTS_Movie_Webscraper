@@ -294,7 +294,7 @@ class WebScraper(object):
 ############################################
 #               MAIN
 ############################################
-asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
+# asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
 try :
     start = perf_counter()
     r = requests.get('https://yts.mx/api/v2/list_movies.json?limit=50&page=1')
