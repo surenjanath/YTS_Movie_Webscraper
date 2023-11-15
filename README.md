@@ -7,6 +7,7 @@ This Python script is designed to scrape movie data from the YTS website and sto
 
 GITHUB ACTION LAST RAN :
 {{last_run_history}}
+- 2023-11-14 21:53:29
 - 2023-11-13 21:50:21
 - 2023-11-12 21:52:14
 - 2023-11-11 21:53:59
